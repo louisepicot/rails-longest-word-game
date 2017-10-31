@@ -3,7 +3,7 @@
 <h1> ******** Welcome to the longest word-game!********</h1>
 <p>Here is your grid:</p>
 
-<p><%= @grid.join(" ") %></p>
+<p><%= @grid %></p>
 <p>"*****************************************************"</p>
 <p>What's your best shot?</p>
 
@@ -12,6 +12,8 @@
 
 
 <form action="/score" method="get">
+  <input type="hidden" value="<%= @start_time %>" name="start_time">
+  <input type="hidden" value="<%= @grid %>" name="grid">
   <input type="text" name="input" placeholder="what's your best shot?">
   <input type="submit">
 </form>

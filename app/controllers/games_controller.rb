@@ -1,15 +1,23 @@
+require 'open-uri'
+require 'json'
+
+
 class GamesController < ApplicationController
   def game
-    @grid = generate_grid(9)
+    @grid = generate_grid(54).join
     @start_time = Time.now
-    @user_input = params[:input]
-    @end_time = Time.now
+
   end
 
   def score
-    @result = run_game(@user_input, @grid, @start_time, @end_time)
+    end_time = Time.now
+    start_time = Time.parse(params[:start_time])
+    @user_input = params[:input]
+    grid = params[:grid].split('')
+    @result = run_game(@user_input, grid, start_time, end_time)
+
   end
-end
+
 
 
 def generate_grid(grid_size)
@@ -51,4 +59,6 @@ def english_word?(word)
   response = open("https://wagon-dictionary.herokuapp.com/#{word}")
   json = JSON.parse(response.read)
   return json['found']
+end
+
 end
